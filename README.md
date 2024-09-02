@@ -17,13 +17,13 @@ El proyecto está implementado en Python, utilizando la biblioteca PLY (Python L
 - **Extensibilidad:** El lenguaje está diseñado para ser fácilmente ampliable, permitiendo la inclusión de más características en futuras versiones.
 
 ## Estructura del Proyecto
-# mqtt_lexer.py 
+## mqtt_lexer.py 
 Este archivo contiene el analizador léxico (lexer), responsable de definir y reconocer los tokens del lenguaje, tales como palabras clave, operadores y símbolos.
-# mqtt_parser.py
+## mqtt_parser.py
 Aquí se define el analizador sintáctico (parser), que especifica la gramática del lenguaje y construye el árbol de sintaxis a partir de los tokens identificados por el lexer.
-# main.py
+## main.py
 Es el archivo principal del proyecto, utilizado para probar el funcionamiento del lexer y el parser con ejemplos de código escritos en MQTT-Lenguaje.
-# test
+## test
 Archivo/s destinado/s a pruebas automatizadas para validar el funcionamiento correcto del lexer, el parser y las nuevas funcionalidades.
 
 ## Instalación y Uso
@@ -55,7 +55,7 @@ Para comenzar a utilizar MQTT-Lenguaje, sigue estos pasos:
     ```
 ## Especificaciones
 
-# Definición de Tokens en el Lexer
+## Definición de Tokens en el Lexer
 
 A continuación se proporciona una explicación detallada de cada token definido en el archivo `lexer.py`, junto con sus expresiones regulares y su propósito en el análisis léxico del lenguaje basado en MQTT.
 
