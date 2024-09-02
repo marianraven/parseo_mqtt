@@ -153,3 +153,68 @@ A continuación se proporciona una explicación detallada de cada token definido
 **lex.lex()**  
 - **Descripción**: Construye el analizador léxico (`lexer`) utilizando las definiciones de tokens y reglas proporcionadas. El analizador léxico escaneará el texto de entrada y generará tokens basados en las expresiones regulares definidas.
 
+## Gramáticas
+Las gramáticas determinan cómo se deben estructurar las sentencias del lenguaje. 
+
+Algunas producciones básicas:
+
+Programa es un conjunto de declaraciones y comandos.
+
+programa : comandos
+Comandos: pueden incluir operaciones como conectar, desconectar, enviar mensajes, suscribirse, etc.
+
+comandos : comando
+         | comando comandos
+
+Comando: una acción que el dispositivo puede realizar.
+
+comando : conectar
+        | desconectar
+        | enviar_mensaje
+        | suscribirse
+        | desuscribirse
+
+Conectar: iniciar una conexión MQTT.
+conectar : CONNECT MQTT DEVICE
+Desconectar: terminar una conexión MQTT.
+
+desconectar : DISCONNECT MQTT DEVICE
+Enviar Mensaje: enviar un mensaje a un tópico específico.
+
+enviar_mensaje : SEND MESSAGE TO TOPIC WITH KEY VALUE
+Suscribirse: suscribirse a un tópico para recibir mensajes.
+
+suscribirse : SUBSCRIBE TO TOPIC
+Desuscribirse: desuscribirse de un tópico.
+
+desuscribirse : UNSUBSCRIBE FROM TOPIC
+Estas producciones permiten manejar operaciones básicas como conectarse, desconectarse, enviar mensajes, y gestionar suscripciones.
+
+Operaciones Permitidas con el Lenguaje
+Conectar a un Broker MQTT: Permite establecer una conexión con un servidor MQTT para enviar y recibir mensajes.
+
+Desconectar del Broker MQTT: Permite finalizar la conexión activa con el servidor MQTT.
+
+Enviar Mensajes: Enviar mensajes a un tópico específico usando ciertos parámetros como claves y valores.
+
+Suscribirse y Desuscribirse a Tópicos: Permite recibir mensajes de ciertos tópicos y dejar de recibir mensajes de otros.
+
+Palabras válidas de entrada
+CONNECT, DISCONNECT, SEND, TO, WITH, KEY, VALUE, UNSUBSCRIBE, MQTT, DEVICE, MESSAGE, TOPIC, QUEUE, CONCURRENT, ENCRYPT, AUTH
+
+## Ejemplos de Programas
+
+### Conectar a un dispositivo MQTT
+CONNECT MQTT device_1
+
+### Enviar un mensaje a un tópico
+SEND message_hello TO topic_home WITH key "greeting" value "Hello World"
+
+### Suscribirse a un tópico
+CONNECT MQTT device_1
+SUBSCRIBE TO topic_home
+
+### Desconectar después de enviar un mensaje
+CONNECT MQTT device_1
+SEND message_update TO topic_home WITH key "status" value "updated"
+DISCONNECT MQTT device_1
