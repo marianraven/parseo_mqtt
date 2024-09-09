@@ -10,7 +10,7 @@ El proyecto está implementado en Python, utilizando la biblioteca PLY (Python L
 ## Características del Lenguaje
 
 - **Declaración de Variables:** Se pueden declarar variables y asignarles valores, lo que permite manejar datos.
-- **Suscripciones a Tópicos:** Facilita la suscripción a tópicos específicos para recibir mensajes automáticamente cuando estos son publicados.
+- **Suscripciones a Topics:** Facilita la suscripción a tópicos específicos para recibir mensajes automáticamente cuando estos son publicados.
 - **Publicación de Mensajes:** Permite publicar mensajes en tópicos, enviando datos entre diferentes dispositivos o servicios conectados al broker MQTT.
 - **Condicionales Básicos :** Incluye estructuras condicionales para controlar el flujo del programa basándose en el contenido de los mensajes.
 - **Iteraciones:** Implementa bucles para repetir acciones múltiples veces, lo que permite un control más detallado sobre la ejecución del código y la automatización de tareas repetitivas.
@@ -61,52 +61,52 @@ A continuación se proporciona una explicación detallada de cada token definido
 
 ## Definición de Tokens
 
-**DEVICE**  
-- **Expresión Regular**: `r'device_[0-9]+'`  
-- **Descripción**: Coincide con identificadores de dispositivos en el formato `device_<número>`, donde `<número>` es una secuencia de dígitos.  
-- **Ejemplo**: `device_01`
+**DISPOSITIVO**  
+- **Expresión Regular**: `r'dispositivo_[0-9]+'`  
+- **Descripción**: Coincide con identificadores de dispositivos en el formato `dispositivo_<número>`, donde `<número>` es una secuencia de dígitos.  
+- **Ejemplo**: `dispositivo_01`
 
-**MESSAGE**  
-- **Expresión Regular**: `r'message_[a-zA-Z_]+'`  
-- **Descripción**: Coincide con identificadores de mensajes en el formato `message_<cadena>`, donde `<cadena>` es una secuencia de letras o guiones bajos.  
-- **Ejemplo**: `message_alert`
+**MENSAJE**  
+- **Expresión Regular**: `r'mensaje_[a-zA-Z_]+'`  
+- **Descripción**: Coincide con identificadores de mensajes en el formato `mensaje_<cadena>`, donde `<cadena>` es una secuencia de letras o guiones bajos.  
+- **Ejemplo**: `mensaje_alerta`
 
-**SEND**  
-- **Expresión Regular**: `r'send'`  
-- **Descripción**: Coincide con la palabra clave `send`. Se usa para indicar una operación de envío de datos en el lenguaje.
+**ENVIAR**  
+- **Expresión Regular**: `r'enviar'`  
+- **Descripción**: Coincide con la palabra clave `enviar`. Se usa para indicar una operación de envío de datos en el lenguaje.
 
-**TO**  
-- **Expresión Regular**: `r'to'`  
-- **Descripción**: Coincide con la palabra clave `to`. Se usa para especificar el destino en las operaciones.
+**A**  
+- **Expresión Regular**: `r'a'`  
+- **Descripción**: Coincide con la palabra clave `a`. Se usa para especificar el destino en las operaciones.
 
-**WITH**  
-- **Expresión Regular**: `r'with'`  
-- **Descripción**: Coincide con la palabra clave `with`. Se usa para indicar el uso de una clave o valor asociado en las operaciones.
+**CON**  
+- **Expresión Regular**: `r'con'`  
+- **Descripción**: Coincide con la palabra clave `con`. Se usa para indicar el uso de una clave o valor asociado en las operaciones.
 
 **KEY**  
 - **Expresión Regular**: `r'key'`  
 - **Descripción**: Coincide con la palabra clave `key`. Se usa para especificar que el siguiente valor es una clave.
 
-**VALUE**  
+**VALOR**  
 - **Expresión Regular**: `r'\"[^\"]*\"'`  
 - **Descripción**: Coincide con un valor entre comillas dobles. Permite capturar cualquier texto dentro de comillas.  
 - **Ejemplo**: `"mysecretkey"`
 
-**ENCRYPT**  
-- **Expresión Regular**: `r'encrypt'`  
-- **Descripción**: Coincide con la palabra clave `encrypt`. Se usa para indicar una operación de cifrado de datos.
+**ENCRIPTADO**  
+- **Expresión Regular**: `r'encriptado'`  
+- **Descripción**: Coincide con la palabra clave `encriptado`. Se usa para indicar una operación de cifrado de datos.
 
 **AUTH**  
 - **Expresión Regular**: `r'auth'`  
 - **Descripción**: Coincide con la palabra clave `auth`. Se usa para indicar una operación de autenticación.
 
-**CONCURRENT**  
-- **Expresión Regular**: `r'concurrent'`  
-- **Descripción**: Coincide con la palabra clave `concurrent`. Se usa para indicar que una operación se realizará de manera concurrente.
+**CONCURRENTE**  
+- **Expresión Regular**: `r'concurrente'`  
+- **Descripción**: Coincide con la palabra clave `concurrente`. Se usa para indicar que una operación se realizará de manera concurrente.
 
-**QUEUE**  
-- **Expresión Regular**: `r'queue'`  
-- **Descripción**: Coincide con la palabra clave `queue`. Se usa para indicar que un mensaje se añadirá a una cola.
+**COLA**  
+- **Expresión Regular**: `r'cola'`  
+- **Descripción**: Coincide con la palabra clave `cola`. Se usa para indicar que un mensaje se añadirá a una cola.
 
 **MQTT**  
 - **Expresión Regular**: `r'mqtt'`  
@@ -116,25 +116,25 @@ A continuación se proporciona una explicación detallada de cada token definido
 - **Expresión Regular**: `r'topic'`  
 - **Descripción**: Coincide con la palabra clave `topic`. Se usa para especificar el tópico en las operaciones MQTT.
 
-**CONNECT**  
-- **Expresión Regular**: `r'connect'`  
-- **Descripción**: Coincide con la palabra clave `connect`. Se usa para indicar una operación de conexión a un dispositivo.
+**CONECTAR**  
+- **Expresión Regular**: `r'conectar'`  
+- **Descripción**: Coincide con la palabra clave `conectar`. Se usa para indicar una operación de conexión a un dispositivo.
 
-**DISCONNECT**  
-- **Expresión Regular**: `r'disconnect'`  
-- **Descripción**: Coincide con la palabra clave `disconnect`. Se usa para indicar una operación de desconexión de un dispositivo.
+**DESCONECTAR**  
+- **Expresión Regular**: `r'desconectar'`  
+- **Descripción**: Coincide con la palabra clave `desconectar`. Se usa para indicar una operación de desconexión de un dispositivo.
 
-**PUBLISH**  
-- **Expresión Regular**: `r'publish'`  
-- **Descripción**: Coincide con la palabra clave `publish`. Se usa para indicar una operación de publicación de un mensaje.
+**PUBLICAR**  
+- **Expresión Regular**: `r'publicar'`  
+- **Descripción**: Coincide con la palabra clave `publicar`. Se usa para indicar una operación de publicación de un mensaje.
 
-**SUBSCRIBE**  
-- **Expresión Regular**: `r'subscribe'`  
-- **Descripción**: Coincide con la palabra clave `subscribe`. Se usa para indicar una operación de suscripción a un tópico.
+**SUSCRIBIRSE**  
+- **Expresión Regular**: `r'suscribirse'`  
+- **Descripción**: Coincide con la palabra clave `suscribirse`. Se usa para indicar una operación de suscripción a un tópico.
 
-**UNSUBSCRIBE**  
-- **Expresión Regular**: `r'unsubscribe'`  
-- **Descripción**: Coincide con la palabra clave `unsubscribe`. Se usa para indicar una operación de desuscripción de un tópico.
+**DESUSCRIBIRSE**  
+- **Expresión Regular**: `r'desuscribirse'`  
+- **Descripción**: Coincide con la palabra clave `desuscribirse`. Se usa para indicar una operación de desuscripción de un tópico.
 
 **t_ignore**  
 - **Valor**: `' \t'`  
@@ -145,8 +145,8 @@ A continuación se proporciona una explicación detallada de cada token definido
 **t_error**  
 - **Descripción**: Maneja errores léxicos. Imprime un mensaje de error cuando se encuentra un carácter no permitido y omite ese carácter para continuar el análisis.
 
-**t_DEVICE y t_MESSAGE**  
-- **Descripción**: Definen cómo se deben reconocer los tokens `DEVICE` y `MESSAGE`, respectivamente, utilizando expresiones regulares personalizadas.
+**t_DISPOSITIVO y t_MENSAJE**  
+- **Descripción**: Definen cómo se deben reconocer los tokens `DISPOSITIVO` y `MENSAJE`, respectivamente, utilizando expresiones regulares personalizadas.
 
 ## Construcción del Lexer
 
@@ -175,19 +175,19 @@ comando : conectar
         | desuscribirse
 
 Conectar: iniciar una conexión MQTT.
-conectar : CONNECT MQTT DEVICE
+conectar : CONECTAR MQTT DISPOSITIVO
 Desconectar: terminar una conexión MQTT.
 
-desconectar : DISCONNECT MQTT DEVICE
+desconectar : DESCONECTAR MQTT DISPOSITIVO
 Enviar Mensaje: enviar un mensaje a un tópico específico.
 
-enviar_mensaje : SEND MESSAGE TO TOPIC WITH KEY VALUE
+enviar_mensaje : ENVIAR MENSAJE A TOPIC CON KEY VALOR
 Suscribirse: suscribirse a un tópico para recibir mensajes.
 
-suscribirse : SUBSCRIBE TO TOPIC
+suscribirse : SUSCRIBIRSE A TOPIC
 Desuscribirse: desuscribirse de un tópico.
 
-desuscribirse : UNSUBSCRIBE FROM TOPIC
+desuscribirse : DESUSCRIBIRSE A TOPIC
 Estas producciones permiten manejar operaciones básicas como conectarse, desconectarse, enviar mensajes, y gestionar suscripciones.
 
 Operaciones Permitidas con el Lenguaje
@@ -200,21 +200,21 @@ Enviar Mensajes: Enviar mensajes a un tópico específico usando ciertos paráme
 Suscribirse y Desuscribirse a Tópicos: Permite recibir mensajes de ciertos tópicos y dejar de recibir mensajes de otros.
 
 Palabras válidas de entrada
-CONNECT, DISCONNECT, SEND, TO, WITH, KEY, VALUE, UNSUBSCRIBE, MQTT, DEVICE, MESSAGE, TOPIC, QUEUE, CONCURRENT, ENCRYPT, AUTH
+CONECTAR, DESCONECTAR, ENVIAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOSITIVO, MENSAJE, TOPIC, COLA, CONCURRENTE, ENCRIPTADO, AUTH
 
 ## Ejemplos de Programas
 
 ### Conectar a un dispositivo MQTT
-CONNECT MQTT device_1
+CONECTAR MQTT dispositivo_1
 
 ### Enviar un mensaje a un tópico
-SEND message_hello TO topic_home WITH key "greeting" value "Hello World"
+ENVIAR mensaje_hola A topic_casa CON key "saludo" valor "Hola Mundo"
 
 ### Suscribirse a un tópico
-CONNECT MQTT device_1
-SUBSCRIBE TO topic_home
+CONECTAR MQTT dispositivo_1
+SUSCRIBIRSE A topic_casa
 
 ### Desconectar después de enviar un mensaje
-CONNECT MQTT device_1
-SEND message_update TO topic_home WITH key "status" value "updated"
-DISCONNECT MQTT device_1
+CONECTAR MQTT dispositivo_1
+ENVIAR mensaje_update A topic_casa CON key "estado" valor "updated"
+DESCONECTAR MQTT dispositivo_1
