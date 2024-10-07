@@ -1,0 +1,586 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    VALOR
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> comandos
+Rule 2     comandos -> comando
+Rule 3     comandos -> comando comandos
+Rule 4     comando -> conectar
+Rule 5     comando -> desconectar
+Rule 6     comando -> publicar
+Rule 7     comando -> suscribirse
+Rule 8     comando -> desuscribirse
+Rule 9     comando -> habilitar_encriptado
+Rule 10    comando -> habilitar_auth
+Rule 11    comando -> establecer_qos
+Rule 12    habilitar_encriptado -> ENCRIPTADO A valor_booleano
+Rule 13    valor_booleano -> TRUE
+Rule 14    valor_booleano -> FALSE
+Rule 15    habilitar_auth -> AUTH VALOR_STRING VALOR_STRING
+Rule 16    establecer_qos -> QOS NUMERO
+Rule 17    conectar -> CONECTAR MQTT DISPOSITIVO
+Rule 18    desconectar -> DESCONECTAR MQTT DISPOSITIVO
+Rule 19    publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING
+Rule 20    suscribirse -> SUSCRIBIRSE A TOPIC
+Rule 21    desuscribirse -> DESUSCRIBIRSE A TOPIC
+
+Terminals, with rules where they appear
+
+A                    : 12 19 20 21
+AUTH                 : 15
+CON                  : 19
+CONECTAR             : 17
+DESCONECTAR          : 18
+DESUSCRIBIRSE        : 21
+DISPOSITIVO          : 17 18
+ENCRIPTADO           : 12
+FALSE                : 14
+KEY                  : 19
+MENSAJE              : 19
+MQTT                 : 17 18
+NUMERO               : 16
+PUBLICAR             : 19
+QOS                  : 16
+SUSCRIBIRSE          : 20
+TOPIC                : 19 20 21
+TRUE                 : 13
+VALOR                : 
+VALOR_STRING         : 15 15 19
+error                : 
+
+Nonterminals, with rules where they appear
+
+comando              : 2 3
+comandos             : 1 3
+conectar             : 4
+desconectar          : 5
+desuscribirse        : 8
+establecer_qos       : 11
+habilitar_auth       : 10
+habilitar_encriptado : 9
+programa             : 0
+publicar             : 6
+suscribirse          : 7
+valor_booleano       : 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . comandos
+    (2) comandos -> . comando
+    (3) comandos -> . comando comandos
+    (4) comando -> . conectar
+    (5) comando -> . desconectar
+    (6) comando -> . publicar
+    (7) comando -> . suscribirse
+    (8) comando -> . desuscribirse
+    (9) comando -> . habilitar_encriptado
+    (10) comando -> . habilitar_auth
+    (11) comando -> . establecer_qos
+    (17) conectar -> . CONECTAR MQTT DISPOSITIVO
+    (18) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
+    (19) publicar -> . PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING
+    (20) suscribirse -> . SUSCRIBIRSE A TOPIC
+    (21) desuscribirse -> . DESUSCRIBIRSE A TOPIC
+    (12) habilitar_encriptado -> . ENCRIPTADO A valor_booleano
+    (15) habilitar_auth -> . AUTH VALOR_STRING VALOR_STRING
+    (16) establecer_qos -> . QOS NUMERO
+
+    CONECTAR        shift and go to state 12
+    DESCONECTAR     shift and go to state 13
+    PUBLICAR        shift and go to state 14
+    SUSCRIBIRSE     shift and go to state 15
+    DESUSCRIBIRSE   shift and go to state 16
+    ENCRIPTADO      shift and go to state 17
+    AUTH            shift and go to state 18
+    QOS             shift and go to state 19
+
+    programa                       shift and go to state 1
+    comandos                       shift and go to state 2
+    comando                        shift and go to state 3
+    conectar                       shift and go to state 4
+    desconectar                    shift and go to state 5
+    publicar                       shift and go to state 6
+    suscribirse                    shift and go to state 7
+    desuscribirse                  shift and go to state 8
+    habilitar_encriptado           shift and go to state 9
+    habilitar_auth                 shift and go to state 10
+    establecer_qos                 shift and go to state 11
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> comandos .
+
+    $end            reduce using rule 1 (programa -> comandos .)
+
+
+state 3
+
+    (2) comandos -> comando .
+    (3) comandos -> comando . comandos
+    (2) comandos -> . comando
+    (3) comandos -> . comando comandos
+    (4) comando -> . conectar
+    (5) comando -> . desconectar
+    (6) comando -> . publicar
+    (7) comando -> . suscribirse
+    (8) comando -> . desuscribirse
+    (9) comando -> . habilitar_encriptado
+    (10) comando -> . habilitar_auth
+    (11) comando -> . establecer_qos
+    (17) conectar -> . CONECTAR MQTT DISPOSITIVO
+    (18) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
+    (19) publicar -> . PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING
+    (20) suscribirse -> . SUSCRIBIRSE A TOPIC
+    (21) desuscribirse -> . DESUSCRIBIRSE A TOPIC
+    (12) habilitar_encriptado -> . ENCRIPTADO A valor_booleano
+    (15) habilitar_auth -> . AUTH VALOR_STRING VALOR_STRING
+    (16) establecer_qos -> . QOS NUMERO
+
+    $end            reduce using rule 2 (comandos -> comando .)
+    CONECTAR        shift and go to state 12
+    DESCONECTAR     shift and go to state 13
+    PUBLICAR        shift and go to state 14
+    SUSCRIBIRSE     shift and go to state 15
+    DESUSCRIBIRSE   shift and go to state 16
+    ENCRIPTADO      shift and go to state 17
+    AUTH            shift and go to state 18
+    QOS             shift and go to state 19
+
+    comando                        shift and go to state 3
+    comandos                       shift and go to state 20
+    conectar                       shift and go to state 4
+    desconectar                    shift and go to state 5
+    publicar                       shift and go to state 6
+    suscribirse                    shift and go to state 7
+    desuscribirse                  shift and go to state 8
+    habilitar_encriptado           shift and go to state 9
+    habilitar_auth                 shift and go to state 10
+    establecer_qos                 shift and go to state 11
+
+state 4
+
+    (4) comando -> conectar .
+
+    CONECTAR        reduce using rule 4 (comando -> conectar .)
+    DESCONECTAR     reduce using rule 4 (comando -> conectar .)
+    PUBLICAR        reduce using rule 4 (comando -> conectar .)
+    SUSCRIBIRSE     reduce using rule 4 (comando -> conectar .)
+    DESUSCRIBIRSE   reduce using rule 4 (comando -> conectar .)
+    ENCRIPTADO      reduce using rule 4 (comando -> conectar .)
+    AUTH            reduce using rule 4 (comando -> conectar .)
+    QOS             reduce using rule 4 (comando -> conectar .)
+    $end            reduce using rule 4 (comando -> conectar .)
+
+
+state 5
+
+    (5) comando -> desconectar .
+
+    CONECTAR        reduce using rule 5 (comando -> desconectar .)
+    DESCONECTAR     reduce using rule 5 (comando -> desconectar .)
+    PUBLICAR        reduce using rule 5 (comando -> desconectar .)
+    SUSCRIBIRSE     reduce using rule 5 (comando -> desconectar .)
+    DESUSCRIBIRSE   reduce using rule 5 (comando -> desconectar .)
+    ENCRIPTADO      reduce using rule 5 (comando -> desconectar .)
+    AUTH            reduce using rule 5 (comando -> desconectar .)
+    QOS             reduce using rule 5 (comando -> desconectar .)
+    $end            reduce using rule 5 (comando -> desconectar .)
+
+
+state 6
+
+    (6) comando -> publicar .
+
+    CONECTAR        reduce using rule 6 (comando -> publicar .)
+    DESCONECTAR     reduce using rule 6 (comando -> publicar .)
+    PUBLICAR        reduce using rule 6 (comando -> publicar .)
+    SUSCRIBIRSE     reduce using rule 6 (comando -> publicar .)
+    DESUSCRIBIRSE   reduce using rule 6 (comando -> publicar .)
+    ENCRIPTADO      reduce using rule 6 (comando -> publicar .)
+    AUTH            reduce using rule 6 (comando -> publicar .)
+    QOS             reduce using rule 6 (comando -> publicar .)
+    $end            reduce using rule 6 (comando -> publicar .)
+
+
+state 7
+
+    (7) comando -> suscribirse .
+
+    CONECTAR        reduce using rule 7 (comando -> suscribirse .)
+    DESCONECTAR     reduce using rule 7 (comando -> suscribirse .)
+    PUBLICAR        reduce using rule 7 (comando -> suscribirse .)
+    SUSCRIBIRSE     reduce using rule 7 (comando -> suscribirse .)
+    DESUSCRIBIRSE   reduce using rule 7 (comando -> suscribirse .)
+    ENCRIPTADO      reduce using rule 7 (comando -> suscribirse .)
+    AUTH            reduce using rule 7 (comando -> suscribirse .)
+    QOS             reduce using rule 7 (comando -> suscribirse .)
+    $end            reduce using rule 7 (comando -> suscribirse .)
+
+
+state 8
+
+    (8) comando -> desuscribirse .
+
+    CONECTAR        reduce using rule 8 (comando -> desuscribirse .)
+    DESCONECTAR     reduce using rule 8 (comando -> desuscribirse .)
+    PUBLICAR        reduce using rule 8 (comando -> desuscribirse .)
+    SUSCRIBIRSE     reduce using rule 8 (comando -> desuscribirse .)
+    DESUSCRIBIRSE   reduce using rule 8 (comando -> desuscribirse .)
+    ENCRIPTADO      reduce using rule 8 (comando -> desuscribirse .)
+    AUTH            reduce using rule 8 (comando -> desuscribirse .)
+    QOS             reduce using rule 8 (comando -> desuscribirse .)
+    $end            reduce using rule 8 (comando -> desuscribirse .)
+
+
+state 9
+
+    (9) comando -> habilitar_encriptado .
+
+    CONECTAR        reduce using rule 9 (comando -> habilitar_encriptado .)
+    DESCONECTAR     reduce using rule 9 (comando -> habilitar_encriptado .)
+    PUBLICAR        reduce using rule 9 (comando -> habilitar_encriptado .)
+    SUSCRIBIRSE     reduce using rule 9 (comando -> habilitar_encriptado .)
+    DESUSCRIBIRSE   reduce using rule 9 (comando -> habilitar_encriptado .)
+    ENCRIPTADO      reduce using rule 9 (comando -> habilitar_encriptado .)
+    AUTH            reduce using rule 9 (comando -> habilitar_encriptado .)
+    QOS             reduce using rule 9 (comando -> habilitar_encriptado .)
+    $end            reduce using rule 9 (comando -> habilitar_encriptado .)
+
+
+state 10
+
+    (10) comando -> habilitar_auth .
+
+    CONECTAR        reduce using rule 10 (comando -> habilitar_auth .)
+    DESCONECTAR     reduce using rule 10 (comando -> habilitar_auth .)
+    PUBLICAR        reduce using rule 10 (comando -> habilitar_auth .)
+    SUSCRIBIRSE     reduce using rule 10 (comando -> habilitar_auth .)
+    DESUSCRIBIRSE   reduce using rule 10 (comando -> habilitar_auth .)
+    ENCRIPTADO      reduce using rule 10 (comando -> habilitar_auth .)
+    AUTH            reduce using rule 10 (comando -> habilitar_auth .)
+    QOS             reduce using rule 10 (comando -> habilitar_auth .)
+    $end            reduce using rule 10 (comando -> habilitar_auth .)
+
+
+state 11
+
+    (11) comando -> establecer_qos .
+
+    CONECTAR        reduce using rule 11 (comando -> establecer_qos .)
+    DESCONECTAR     reduce using rule 11 (comando -> establecer_qos .)
+    PUBLICAR        reduce using rule 11 (comando -> establecer_qos .)
+    SUSCRIBIRSE     reduce using rule 11 (comando -> establecer_qos .)
+    DESUSCRIBIRSE   reduce using rule 11 (comando -> establecer_qos .)
+    ENCRIPTADO      reduce using rule 11 (comando -> establecer_qos .)
+    AUTH            reduce using rule 11 (comando -> establecer_qos .)
+    QOS             reduce using rule 11 (comando -> establecer_qos .)
+    $end            reduce using rule 11 (comando -> establecer_qos .)
+
+
+state 12
+
+    (17) conectar -> CONECTAR . MQTT DISPOSITIVO
+
+    MQTT            shift and go to state 21
+
+
+state 13
+
+    (18) desconectar -> DESCONECTAR . MQTT DISPOSITIVO
+
+    MQTT            shift and go to state 22
+
+
+state 14
+
+    (19) publicar -> PUBLICAR . MENSAJE A TOPIC CON KEY VALOR_STRING
+
+    MENSAJE         shift and go to state 23
+
+
+state 15
+
+    (20) suscribirse -> SUSCRIBIRSE . A TOPIC
+
+    A               shift and go to state 24
+
+
+state 16
+
+    (21) desuscribirse -> DESUSCRIBIRSE . A TOPIC
+
+    A               shift and go to state 25
+
+
+state 17
+
+    (12) habilitar_encriptado -> ENCRIPTADO . A valor_booleano
+
+    A               shift and go to state 26
+
+
+state 18
+
+    (15) habilitar_auth -> AUTH . VALOR_STRING VALOR_STRING
+
+    VALOR_STRING    shift and go to state 27
+
+
+state 19
+
+    (16) establecer_qos -> QOS . NUMERO
+
+    NUMERO          shift and go to state 28
+
+
+state 20
+
+    (3) comandos -> comando comandos .
+
+    $end            reduce using rule 3 (comandos -> comando comandos .)
+
+
+state 21
+
+    (17) conectar -> CONECTAR MQTT . DISPOSITIVO
+
+    DISPOSITIVO     shift and go to state 29
+
+
+state 22
+
+    (18) desconectar -> DESCONECTAR MQTT . DISPOSITIVO
+
+    DISPOSITIVO     shift and go to state 30
+
+
+state 23
+
+    (19) publicar -> PUBLICAR MENSAJE . A TOPIC CON KEY VALOR_STRING
+
+    A               shift and go to state 31
+
+
+state 24
+
+    (20) suscribirse -> SUSCRIBIRSE A . TOPIC
+
+    TOPIC           shift and go to state 32
+
+
+state 25
+
+    (21) desuscribirse -> DESUSCRIBIRSE A . TOPIC
+
+    TOPIC           shift and go to state 33
+
+
+state 26
+
+    (12) habilitar_encriptado -> ENCRIPTADO A . valor_booleano
+    (13) valor_booleano -> . TRUE
+    (14) valor_booleano -> . FALSE
+
+    TRUE            shift and go to state 35
+    FALSE           shift and go to state 36
+
+    valor_booleano                 shift and go to state 34
+
+state 27
+
+    (15) habilitar_auth -> AUTH VALOR_STRING . VALOR_STRING
+
+    VALOR_STRING    shift and go to state 37
+
+
+state 28
+
+    (16) establecer_qos -> QOS NUMERO .
+
+    CONECTAR        reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    DESCONECTAR     reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    PUBLICAR        reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    SUSCRIBIRSE     reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    DESUSCRIBIRSE   reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    ENCRIPTADO      reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    AUTH            reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    QOS             reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+    $end            reduce using rule 16 (establecer_qos -> QOS NUMERO .)
+
+
+state 29
+
+    (17) conectar -> CONECTAR MQTT DISPOSITIVO .
+
+    CONECTAR        reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    DESCONECTAR     reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    PUBLICAR        reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    SUSCRIBIRSE     reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    DESUSCRIBIRSE   reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    ENCRIPTADO      reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    AUTH            reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    QOS             reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+    $end            reduce using rule 17 (conectar -> CONECTAR MQTT DISPOSITIVO .)
+
+
+state 30
+
+    (18) desconectar -> DESCONECTAR MQTT DISPOSITIVO .
+
+    CONECTAR        reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    DESCONECTAR     reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    PUBLICAR        reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    SUSCRIBIRSE     reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    DESUSCRIBIRSE   reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    ENCRIPTADO      reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    AUTH            reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    QOS             reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    $end            reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+
+
+state 31
+
+    (19) publicar -> PUBLICAR MENSAJE A . TOPIC CON KEY VALOR_STRING
+
+    TOPIC           shift and go to state 38
+
+
+state 32
+
+    (20) suscribirse -> SUSCRIBIRSE A TOPIC .
+
+    CONECTAR        reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    DESCONECTAR     reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    PUBLICAR        reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    SUSCRIBIRSE     reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    DESUSCRIBIRSE   reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    ENCRIPTADO      reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    AUTH            reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    QOS             reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    $end            reduce using rule 20 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+
+
+state 33
+
+    (21) desuscribirse -> DESUSCRIBIRSE A TOPIC .
+
+    CONECTAR        reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    DESCONECTAR     reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    PUBLICAR        reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    SUSCRIBIRSE     reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    DESUSCRIBIRSE   reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    ENCRIPTADO      reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    AUTH            reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    QOS             reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    $end            reduce using rule 21 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+
+
+state 34
+
+    (12) habilitar_encriptado -> ENCRIPTADO A valor_booleano .
+
+    CONECTAR        reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    DESCONECTAR     reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    PUBLICAR        reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    SUSCRIBIRSE     reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    DESUSCRIBIRSE   reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    ENCRIPTADO      reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    AUTH            reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    QOS             reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+    $end            reduce using rule 12 (habilitar_encriptado -> ENCRIPTADO A valor_booleano .)
+
+
+state 35
+
+    (13) valor_booleano -> TRUE .
+
+    CONECTAR        reduce using rule 13 (valor_booleano -> TRUE .)
+    DESCONECTAR     reduce using rule 13 (valor_booleano -> TRUE .)
+    PUBLICAR        reduce using rule 13 (valor_booleano -> TRUE .)
+    SUSCRIBIRSE     reduce using rule 13 (valor_booleano -> TRUE .)
+    DESUSCRIBIRSE   reduce using rule 13 (valor_booleano -> TRUE .)
+    ENCRIPTADO      reduce using rule 13 (valor_booleano -> TRUE .)
+    AUTH            reduce using rule 13 (valor_booleano -> TRUE .)
+    QOS             reduce using rule 13 (valor_booleano -> TRUE .)
+    $end            reduce using rule 13 (valor_booleano -> TRUE .)
+
+
+state 36
+
+    (14) valor_booleano -> FALSE .
+
+    CONECTAR        reduce using rule 14 (valor_booleano -> FALSE .)
+    DESCONECTAR     reduce using rule 14 (valor_booleano -> FALSE .)
+    PUBLICAR        reduce using rule 14 (valor_booleano -> FALSE .)
+    SUSCRIBIRSE     reduce using rule 14 (valor_booleano -> FALSE .)
+    DESUSCRIBIRSE   reduce using rule 14 (valor_booleano -> FALSE .)
+    ENCRIPTADO      reduce using rule 14 (valor_booleano -> FALSE .)
+    AUTH            reduce using rule 14 (valor_booleano -> FALSE .)
+    QOS             reduce using rule 14 (valor_booleano -> FALSE .)
+    $end            reduce using rule 14 (valor_booleano -> FALSE .)
+
+
+state 37
+
+    (15) habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .
+
+    CONECTAR        reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    DESCONECTAR     reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    PUBLICAR        reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    SUSCRIBIRSE     reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    DESUSCRIBIRSE   reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    ENCRIPTADO      reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    AUTH            reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    QOS             reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+    $end            reduce using rule 15 (habilitar_auth -> AUTH VALOR_STRING VALOR_STRING .)
+
+
+state 38
+
+    (19) publicar -> PUBLICAR MENSAJE A TOPIC . CON KEY VALOR_STRING
+
+    CON             shift and go to state 39
+
+
+state 39
+
+    (19) publicar -> PUBLICAR MENSAJE A TOPIC CON . KEY VALOR_STRING
+
+    KEY             shift and go to state 40
+
+
+state 40
+
+    (19) publicar -> PUBLICAR MENSAJE A TOPIC CON KEY . VALOR_STRING
+
+    VALOR_STRING    shift and go to state 41
+
+
+state 41
+
+    (19) publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .
+
+    CONECTAR        reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    DESCONECTAR     reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    PUBLICAR        reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    SUSCRIBIRSE     reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    DESUSCRIBIRSE   reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    ENCRIPTADO      reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    AUTH            reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    QOS             reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+    $end            reduce using rule 19 (publicar -> PUBLICAR MENSAJE A TOPIC CON KEY VALOR_STRING .)
+
