@@ -1,7 +1,6 @@
-# mqtt_parser.py (PARSER)
 import ply.yacc as yacc
 from mqtt_lexer import tokens
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet #Encontre que esta librería me servía para la encriptacion de los mensajes
 
 # Variables globales para manejar el estado de autenticación y encriptación
 auth_required = False

@@ -43,7 +43,7 @@ t_FALSE = r'(?i)false'
 
 # Expresiones regulares más complejas
 def t_DISPOSITIVO(t):
-   r'(?i)dispositivo_[0-9]+'  # Maneja el formato de dispositivo
+   r'(?i)dispositivo_[0-9]+'  # Maneja el formato de dispositivo y reconoce sensitive case
    return t
 
 def t_MENSAJE(t):
@@ -63,7 +63,7 @@ def t_VALOR(t):
 
 # Expresión regular para manejar números(QoS)
 def t_NUMERO(t):
-   r'[0-9]+'  # Captura números
+   r'[0-9]+'  
    t.value = int(t.value)  # Convierto el valor a entero
    return t
 
