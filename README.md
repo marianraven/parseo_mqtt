@@ -84,10 +84,11 @@ A continuación se proporciona una explicación detallada de cada token definido
 | **DESCONECTAR**     | `r'(?i)desconectar'`          | Indica una operación de desconexión.                      | `desconectar`        |
 | **SUSCRIBIRSE**     | `r'suscribirse'`              | Indica una operación de suscripción.                      | `suscribirse`        |
 | **DESUSCRIBIRSE**   | `r'desuscribirse'`            | Indica una operación de desuscripción.                    | `desuscribirse`      |
-| **t_ignore**        | `' \t'`                       | Especifica caracteres que se ignoran durante el análisis. | ` ` (espacio/tab)    |
+|
 
 
 ## Funciones del Lexer
+- `t_ignore`: Especifica caracteres que se ignoran durante el análisis.
 - `t_error`: Maneja errores léxicos y omite caracteres no permitidos.
 - `t_DISPOSITIVO` y `t_MENSAJE`: Definen cómo se reconocen los tokens DISPOSITIVO y MENSAJE.
 
