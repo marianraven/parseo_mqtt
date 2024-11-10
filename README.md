@@ -67,72 +67,25 @@ A continuación se proporciona una explicación detallada de cada token definido
 
 ### Definición de Tokens
 
-#### DISPOSITIVO
-- **Expresión Regular**: `r'dispositivo_[0-9]+'`
-- **Descripción**: Coincide con identificadores en el formato `dispositivo_<número>`.
-- **Ejemplo**: `dispositivo_01`
+| **Token**           | **Expresión Regular**          | **Descripción**                                           | **Ejemplo**          |
+|---------------------|--------------------------------|-----------------------------------------------------------|-----------------------|
+| **DISPOSITIVO**     | `r'dispositivo_[0-9]+'`       | Coincide con identificadores en el formato `dispositivo_<número>`. | `dispositivo_01`     |
+| **MENSAJE**         | `r'mensaje_[a-zA-Z_]+'`       | Coincide con identificadores en el formato `mensaje_<cadena>`. | `mensaje_alerta`     |
+| **PUBLICAR**        | `r'publicar'`                 | Indica una operación de envío de datos.                   | `publicar`           |
+| **A**               | `r'a'`                        | Especifica el destino en las operaciones.                 | `a`                  |
+| **CON**             | `r'con'`                      | Indica el uso de una clave o valor asociado.              | `con`                |
+| **KEY**             | `r'key'`                      | Especifica que el siguiente valor es una clave.           | `key`                |
+| **VALOR**           | `r'\"[^\"]*\"'`               | Captura cualquier texto dentro de comillas.               | `"mysecretkey"`      |
+| **ENCRIPTADO**      | `r'encriptado'`               | Indica una operación de cifrado.                          | `encriptado`         |
+| **AUTH**            | `r'auth'`                     | Indica una operación de autenticación.                    | `auth`               |
+| **MQTT**            | `r'mqtt'`                     | Se refiere al protocolo MQTT.                             | `mqtt`               |
+| **TOPIC**           | `r'topic'`                    | Especifica el tópico en las operaciones.                  | `topic`              |
+| **CONECTAR**        | `r'(?i)conectar'`             | Indica una operación de conexión.                         | `conectar`           |
+| **DESCONECTAR**     | `r'(?i)desconectar'`          | Indica una operación de desconexión.                      | `desconectar`        |
+| **SUSCRIBIRSE**     | `r'suscribirse'`              | Indica una operación de suscripción.                      | `suscribirse`        |
+| **DESUSCRIBIRSE**   | `r'desuscribirse'`            | Indica una operación de desuscripción.                    | `desuscribirse`      |
+| **t_ignore**        | `' \t'`                       | Especifica caracteres que se ignoran durante el análisis. | ` ` (espacio/tab)    |
 
-#### MENSAJE
-- **Expresión Regular**: `r'mensaje_[a-zA-Z_]+'`
-- **Descripción**: Coincide con identificadores en el formato `mensaje_<cadena>`.
-- **Ejemplo**: `mensaje_alerta`
-
-#### PUBLICAR
-- **Expresión Regular**: `r'publicar'`
-- **Descripción**: Indica una operación de envío de datos.
-
-#### A
-- **Expresión Regular**: `r'a'`
-- **Descripción**: Especifica el destino en las operaciones.
-
-#### CON
-- **Expresión Regular**: `r'con'`
-- **Descripción**: Indica el uso de una clave o valor asociado.
-
-#### KEY
-- **Expresión Regular**: `r'key'`
-- **Descripción**: Especifica que el siguiente valor es una clave.
-
-#### VALOR
-- **Expresión Regular**: `r'\"[^\"]*\"'`
-- **Descripción**: Captura cualquier texto dentro de comillas.
-- **Ejemplo**: `"mysecretkey"`
-
-#### ENCRIPTADO
-- **Expresión Regular**: `r'encriptado'`
-- **Descripción**: Indica una operación de cifrado.
-
-#### AUTH
-- **Expresión Regular**: `r'auth'`
-- **Descripción**: Indica una operación de autenticación.
-
-#### MQTT
-- **Expresión Regular**: `r'mqtt'`
-- **Descripción**: Se refiere al protocolo MQTT.
-
-#### TOPIC
-- **Expresión Regular**: `r'topic'`
-- **Descripción**: Especifica el tópico en las operaciones.
-
-#### CONECTAR
-- **Expresión Regular**: `r'(?i)conectar'`
-- **Descripción**: Indica una operación de conexión.
-
-#### DESCONECTAR
-- **Expresión Regular**: `r'(?i)desconectar'`
-- **Descripción**: Indica una operación de desconexión.
-
-#### SUSCRIBIRSE
-- **Expresión Regular**: `r'suscribirse'`
-- **Descripción**: Indica una operación de suscripción.
-
-#### DESUSCRIBIRSE
-- **Expresión Regular**: `r'desuscribirse'`
-- **Descripción**: Indica una operación de desuscripción.
-
-#### t_ignore
-- **Valor**: `' \t'`
-- **Descripción**: Especifica caracteres que se ignoran durante el análisis.
 
 ## Funciones del Lexer
 - `t_error`: Maneja errores léxicos y omite caracteres no permitidos.
