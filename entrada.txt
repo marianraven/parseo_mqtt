@@ -1,5 +1,32 @@
-CONECTAR MQTT dispositivo_001
-PUBLICAR dispositivo_001 mensaje_temp30 A topic_temperatura CON KEY "tempKey"
+AUTH "admin" "admin123"
 ENCRIPTADO A TRUE
-PUBLICAR dispositivo_001 mensaje_temp35 A topic_temperatura CON KEY "temp35Key"
-DESCONECTAR MQTT dispositivo_001
+CONECTAR MQTT dispositivo_1
+PUBLICAR dispositivo_1 mensaje_temp30 A topic_temperatura CON KEY "tempKey"
+CONECTAR MQTT dispositivo_2
+SUSCRIBIRSE dispositivo_2 A topic_temperatura
+CONECTAR MQTT dispositivo_3
+PUBLICAR dispositivo_3 mensaje_error A topic_temperatura CON KEY "wrongKey"
+CONECTAR MQTT dispositivo_4
+SUSCRIBIRSE dispositivo_4 A topic_humedad
+PUBLICAR dispositivo_4 mensaje_humedad50 A topic_humedad CON KEY "humKey"
+CONECTAR MQTT dispositivo_1
+PUBLICAR dispositivo_1 mensaje_luz10 A topic_luz CON KEY "luzKey"
+SUSCRIBIRSE dispositivo_2 A topic_luz
+SUSCRIBIRSE dispositivo_4 A topic_luz
+PUBLICAR dispositivo_1 mensaje_temp35 A topic_temperatura CON KEY "tempKey"
+PUBLICAR dispositivo_4 mensaje_humedad55 A topic_humedad CON KEY "humKey"
+PUBLICAR dispositivo_3 mensaje_luz15 A topic_luz CON KEY "luzKey"
+PUBLICAR dispositivo_2 mensaje_prueba A topic_inexistente CON KEY "testKey"
+DESUSCRIBIRSE dispositivo_4 A topic_luz
+PUBLICAR dispositivo_3 mensaje_luz20 A topic_luz CON KEY "luzKey"
+DESCONECTAR MQTT dispositivo_1
+DESCONECTAR MQTT dispositivo_4
+PUBLICAR dispositivo_2 mensaje_temp40 A topic_temperatura CON KEY "tempKey"
+PUBLICAR dispositivo_2 mensaje_humedad60 A topic_humedad CON KEY "humKey"
+SUSCRIBIRSE dispositivo_2 A topic_luz
+CONECTAR MQTT dispositivo_1
+SUSCRIBIRSE dispositivo_3 A topic_luz
+PUBLICAR dispositivo_2 mensaje_luz25 A topic_luz CON KEY "luzKey"
+CONECTAR MQTT dispositivo_3
+PUBLICAR dispositivo_4 mensaje_movimiento_detectado A topic_seguridad CON KEY "secKey"
+SUSCRIBIRSE dispositivo_4 A topic_temperatura

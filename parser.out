@@ -18,28 +18,28 @@ Rule 12    valor_booleano -> TRUE
 Rule 13    valor_booleano -> FALSE
 Rule 14    habilitar_auth -> AUTH VALOR VALOR
 Rule 15    conectar -> CONECTAR MQTT DISPOSITIVO
-Rule 16    desconectar -> DESCONECTAR MQTT DISPOSITIVO
+Rule 16    suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC
 Rule 17    publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY VALOR
-Rule 18    suscribirse -> SUSCRIBIRSE A TOPIC
-Rule 19    desuscribirse -> DESUSCRIBIRSE A TOPIC
+Rule 18    desconectar -> DESCONECTAR MQTT DISPOSITIVO
+Rule 19    desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC
 
 Terminals, with rules where they appear
 
-A                    : 11 17 18 19
+A                    : 11 16 17 19
 AUTH                 : 14
 CON                  : 17
 CONECTAR             : 15
-DESCONECTAR          : 16
+DESCONECTAR          : 18
 DESUSCRIBIRSE        : 19
-DISPOSITIVO          : 15 16 17
+DISPOSITIVO          : 15 16 17 18 19
 ENCRIPTADO           : 11
 FALSE                : 13
 KEY                  : 17
 MENSAJE              : 17
-MQTT                 : 15 16
+MQTT                 : 15 18
 PUBLICAR             : 17
-SUSCRIBIRSE          : 18
-TOPIC                : 17 18 19
+SUSCRIBIRSE          : 16
+TOPIC                : 16 17 19
 TRUE                 : 12
 VALOR                : 14 14 17
 error                : 
@@ -74,10 +74,10 @@ state 0
     (9) comando -> . habilitar_encriptado
     (10) comando -> . habilitar_auth
     (15) conectar -> . CONECTAR MQTT DISPOSITIVO
-    (16) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
+    (18) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
     (17) publicar -> . PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY VALOR
-    (18) suscribirse -> . SUSCRIBIRSE A TOPIC
-    (19) desuscribirse -> . DESUSCRIBIRSE A TOPIC
+    (16) suscribirse -> . SUSCRIBIRSE DISPOSITIVO A TOPIC
+    (19) desuscribirse -> . DESUSCRIBIRSE DISPOSITIVO A TOPIC
     (11) habilitar_encriptado -> . ENCRIPTADO A valor_booleano
     (14) habilitar_auth -> . AUTH VALOR VALOR
 
@@ -127,10 +127,10 @@ state 3
     (9) comando -> . habilitar_encriptado
     (10) comando -> . habilitar_auth
     (15) conectar -> . CONECTAR MQTT DISPOSITIVO
-    (16) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
+    (18) desconectar -> . DESCONECTAR MQTT DISPOSITIVO
     (17) publicar -> . PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY VALOR
-    (18) suscribirse -> . SUSCRIBIRSE A TOPIC
-    (19) desuscribirse -> . DESUSCRIBIRSE A TOPIC
+    (16) suscribirse -> . SUSCRIBIRSE DISPOSITIVO A TOPIC
+    (19) desuscribirse -> . DESUSCRIBIRSE DISPOSITIVO A TOPIC
     (11) habilitar_encriptado -> . ENCRIPTADO A valor_booleano
     (14) habilitar_auth -> . AUTH VALOR VALOR
 
@@ -260,7 +260,7 @@ state 11
 
 state 12
 
-    (16) desconectar -> DESCONECTAR . MQTT DISPOSITIVO
+    (18) desconectar -> DESCONECTAR . MQTT DISPOSITIVO
 
     MQTT            shift and go to state 20
 
@@ -274,16 +274,16 @@ state 13
 
 state 14
 
-    (18) suscribirse -> SUSCRIBIRSE . A TOPIC
+    (16) suscribirse -> SUSCRIBIRSE . DISPOSITIVO A TOPIC
 
-    A               shift and go to state 22
+    DISPOSITIVO     shift and go to state 22
 
 
 state 15
 
-    (19) desuscribirse -> DESUSCRIBIRSE . A TOPIC
+    (19) desuscribirse -> DESUSCRIBIRSE . DISPOSITIVO A TOPIC
 
-    A               shift and go to state 23
+    DISPOSITIVO     shift and go to state 23
 
 
 state 16
@@ -316,7 +316,7 @@ state 19
 
 state 20
 
-    (16) desconectar -> DESCONECTAR MQTT . DISPOSITIVO
+    (18) desconectar -> DESCONECTAR MQTT . DISPOSITIVO
 
     DISPOSITIVO     shift and go to state 27
 
@@ -330,16 +330,16 @@ state 21
 
 state 22
 
-    (18) suscribirse -> SUSCRIBIRSE A . TOPIC
+    (16) suscribirse -> SUSCRIBIRSE DISPOSITIVO . A TOPIC
 
-    TOPIC           shift and go to state 29
+    A               shift and go to state 29
 
 
 state 23
 
-    (19) desuscribirse -> DESUSCRIBIRSE A . TOPIC
+    (19) desuscribirse -> DESUSCRIBIRSE DISPOSITIVO . A TOPIC
 
-    TOPIC           shift and go to state 30
+    A               shift and go to state 30
 
 
 state 24
@@ -376,16 +376,16 @@ state 26
 
 state 27
 
-    (16) desconectar -> DESCONECTAR MQTT DISPOSITIVO .
+    (18) desconectar -> DESCONECTAR MQTT DISPOSITIVO .
 
-    CONECTAR        reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    DESCONECTAR     reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    PUBLICAR        reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    SUSCRIBIRSE     reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    DESUSCRIBIRSE   reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    ENCRIPTADO      reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    AUTH            reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
-    $end            reduce using rule 16 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    CONECTAR        reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    DESCONECTAR     reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    PUBLICAR        reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    SUSCRIBIRSE     reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    DESUSCRIBIRSE   reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    ENCRIPTADO      reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    AUTH            reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
+    $end            reduce using rule 18 (desconectar -> DESCONECTAR MQTT DISPOSITIVO .)
 
 
 state 28
@@ -397,30 +397,16 @@ state 28
 
 state 29
 
-    (18) suscribirse -> SUSCRIBIRSE A TOPIC .
+    (16) suscribirse -> SUSCRIBIRSE DISPOSITIVO A . TOPIC
 
-    CONECTAR        reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    DESCONECTAR     reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    PUBLICAR        reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    SUSCRIBIRSE     reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    DESUSCRIBIRSE   reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    ENCRIPTADO      reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    AUTH            reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
-    $end            reduce using rule 18 (suscribirse -> SUSCRIBIRSE A TOPIC .)
+    TOPIC           shift and go to state 36
 
 
 state 30
 
-    (19) desuscribirse -> DESUSCRIBIRSE A TOPIC .
+    (19) desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A . TOPIC
 
-    CONECTAR        reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    DESCONECTAR     reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    PUBLICAR        reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    SUSCRIBIRSE     reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    DESUSCRIBIRSE   reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    ENCRIPTADO      reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    AUTH            reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
-    $end            reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE A TOPIC .)
+    TOPIC           shift and go to state 37
 
 
 state 31
@@ -483,31 +469,59 @@ state 35
 
     (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A . TOPIC CON KEY VALOR
 
-    TOPIC           shift and go to state 36
+    TOPIC           shift and go to state 38
 
 
 state 36
 
-    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC . CON KEY VALOR
+    (16) suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .
 
-    CON             shift and go to state 37
+    CONECTAR        reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    DESCONECTAR     reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    PUBLICAR        reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    SUSCRIBIRSE     reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    DESUSCRIBIRSE   reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    ENCRIPTADO      reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    AUTH            reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    $end            reduce using rule 16 (suscribirse -> SUSCRIBIRSE DISPOSITIVO A TOPIC .)
 
 
 state 37
 
-    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON . KEY VALOR
+    (19) desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .
 
-    KEY             shift and go to state 38
+    CONECTAR        reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    DESCONECTAR     reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    PUBLICAR        reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    SUSCRIBIRSE     reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    DESUSCRIBIRSE   reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    ENCRIPTADO      reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    AUTH            reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
+    $end            reduce using rule 19 (desuscribirse -> DESUSCRIBIRSE DISPOSITIVO A TOPIC .)
 
 
 state 38
 
-    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY . VALOR
+    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC . CON KEY VALOR
 
-    VALOR           shift and go to state 39
+    CON             shift and go to state 39
 
 
 state 39
+
+    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON . KEY VALOR
+
+    KEY             shift and go to state 40
+
+
+state 40
+
+    (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY . VALOR
+
+    VALOR           shift and go to state 41
+
+
+state 41
 
     (17) publicar -> PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY VALOR .
 

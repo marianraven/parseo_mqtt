@@ -1,7 +1,6 @@
 import ply.yacc as yacc
 from mqtt_lexer import tokens
-from cryptography.fernet import Fernet #Encontre que esta librería me servía para la encriptacion de los mensajes
-
+from cryptography.fernet import Fernet
 
 # Variables globales para manejar el estado de autenticación y encriptación
 auth_required = False
@@ -14,6 +13,9 @@ encryption_key = Fernet.generate_key()
 cipher_suite = Fernet(encryption_key)
 
 connected_devices = {}
+
+# Diccionario para almacenar las credenciales de los dispositivos
+device_credentials = {}
 
 def p_programa(p):
     'programa : comandos'
@@ -52,25 +54,57 @@ def p_habilitar_auth(p):
     auth_required = True
     print(f"Autenticación habilitada para usuario: {username}")
 
+# Función para autenticar el dispositivo
+def autenticar_dispositivo(device_name, device_username, device_password):
+    global username, password
+    if device_username == username and device_password == password:
+        connected_devices[device_name] = True
+        print(f"Dispositivo {device_name} autenticado correctamente.")
+    else:
+        print(f"Error: Credenciales incorrectas para el dispositivo {device_name}.")
+        connected_devices[device_name] = False
+
 def p_conectar(p):
     'conectar : CONECTAR MQTT DISPOSITIVO'
-    global connected_devices
+    global connected_devices, device_credentials
     device_name = p[3]
     if device_name in connected_devices:
         print(f"Advertencia: {device_name} ya está conectado.")
     else:
-        connected_devices[device_name] = True
+        connected_devices[device_name] = False  # Inicialmente no autenticado
         print(f"Conectando a {device_name}...")
+        # Simulación de autenticación
+        if auth_required:
+            username_input = input(f"Ingrese usuario para {device_name}: ")
+            password_input = input(f"Ingrese contraseña para {device_name}: ")
+            autenticar_dispositivo(device_name, username_input, password_input)
+        else:
+            connected_devices[device_name] = True  # Autenticación no requerida
+            print(f"Dispositivo {device_name} conectado sin autenticación.")
 
-def p_desconectar(p):
-    'desconectar : DESCONECTAR MQTT DISPOSITIVO'
-    device_name = p[3]
-    if device_name in connected_devices:
-        del connected_devices[device_name]
-        print(f"Desconectando de {device_name}...")
-    else:
-        print(f"Advertencia: {device_name} no estaba conectado.")
+# Diccionario para almacenar las suscripciones de los dispositivos a los tópicos
+topic_subscriptions = {}
 
+def p_suscribirse(p):
+    'suscribirse : SUSCRIBIRSE DISPOSITIVO A TOPIC'
+    device_name = p[2]
+    topic = p[4]
+
+    if device_name not in connected_devices:
+        print(f"Error: El dispositivo {device_name} no está conectado.")
+        return
+
+    # Verificar autenticación
+    if auth_required and connected_devices[device_name] == False:
+        print(f"Error: El dispositivo {device_name} no está autenticado. No puede suscribirse.")
+        return
+
+    # Registrar la suscripción al tópico
+    if topic not in topic_subscriptions:
+        topic_subscriptions[topic] = []
+    topic_subscriptions[topic].append(device_name)
+    print(f"Dispositivo {device_name} se suscribe al tópico {topic}.")
+    
 def p_publicar(p):
     'publicar : PUBLICAR DISPOSITIVO MENSAJE A TOPIC CON KEY VALOR'
     global encryption_enabled, cipher_suite
@@ -81,12 +115,12 @@ def p_publicar(p):
     key = p[7]
 
     if device_name not in connected_devices:
-        print(f"Error: El dispositivo {device_name} no está conectado.")
+        print(f"Error: {device_name} no está conectado.")
         return
 
-    # Autenticación requerida
-    if auth_required and not username:
-        print("Error: Se requiere autenticación para publicar mensajes.")
+    # Verificar autenticación
+    if auth_required and connected_devices[device_name] == False:
+        print(f"Error: El dispositivo {device_name} no está autenticado. No puede publicar.")
         return
 
     # Si la encriptación está habilitada, encripta el mensaje
@@ -94,27 +128,49 @@ def p_publicar(p):
         mensaje = cipher_suite.encrypt(mensaje.encode()).decode()
         print(f"Mensaje encriptado: {mensaje}")
 
-    print(f"Dispositivo {device_name} publica el mensaje {mensaje} a {topic} con clave {key}")
-
-def p_suscribirse(p):
-    'suscribirse : SUSCRIBIRSE A TOPIC'
-    if auth_required and not username:
-        print("Error: Se requiere autenticación para suscribirse a tópicos.")
+    # Mostrar los dispositivos suscritos al tópico
+    if topic in topic_subscriptions:
+        suscriptores = topic_subscriptions[topic]
+        print(f"Dispositivos suscritos a {topic}: {', '.join(suscriptores)}")
+        print(f"Dispositivo {device_name} publica el mensaje {mensaje} a {topic} con clave {key}")
     else:
-        print(f"Suscribiéndose a {p[3]}...")
+        print(f"No hay dispositivos suscritos al tópico {topic}.")
+
+
+
+def p_desconectar(p):
+    'desconectar : DESCONECTAR MQTT DISPOSITIVO'
+    device_name = p[3]
+    if device_name in connected_devices:
+        del connected_devices[device_name]
+        print(f"Desconectando de {device_name}...")
+    else:
+        print(f"Advertencia: {device_name} no estaba conectado.")
 
 def p_desuscribirse(p):
-    'desuscribirse : DESUSCRIBIRSE A TOPIC'
-    if auth_required and not username:
-        print("Error: Se requiere autenticación para desuscribirse de tópicos.")
+    'desuscribirse : DESUSCRIBIRSE DISPOSITIVO A TOPIC'
+    device_name = p[2]
+    topic = p[4]
+    if device_name not in connected_devices:
+        print(f"Error: El dispositivo {device_name} no está conectado.")
     else:
-        print(f"Desuscribiéndose de {p[3]}...")
+        print(f"Dispositivo {device_name} se desuscribe del tópico {topic}.")
 
 def p_error(p):
     if p:
         print(f"Error de sintaxis en el token '{p.value}'")
     else:
         print("Error de sintaxis en EOF")
+
+# Función para autenticar el dispositivo
+def autenticar_dispositivo(device_name, device_username, device_password):
+    global username, password
+    if device_username == username and device_password == password:
+        connected_devices[device_name] = True
+        print(f"Dispositivo {device_name} autenticado correctamente.")
+    else:
+        print(f"Error: Credenciales incorrectas para el dispositivo {device_name}.")
+        connected_devices[device_name] = False
 
 # Construcción del parser
 parser = yacc.yacc()
