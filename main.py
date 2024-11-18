@@ -1,8 +1,9 @@
+import os
 from mqtt_parser import analizar
 
 def main():
-    # Leer código desde un archivo de entrada
-    with open('entrada.txt', 'r') as archivo:
+    ruta = os.path.join(os.path.dirname(__file__), 'entrada.txt')
+    with open(ruta, 'r') as archivo:
         codigo = archivo.read()
     
     # Analizar el código

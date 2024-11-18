@@ -1,1 +1,5 @@
-CONECTAR MQTT dispositivo_1
+CONECTAR MQTT dispositivo_001
+PUBLICAR dispositivo_001 mensaje_temp30 A topic_temperatura CON KEY "tempKey"
+ENCRIPTADO A TRUE
+PUBLICAR dispositivo_001 mensaje_temp35 A topic_temperatura CON KEY "temp35Key"
+DESCONECTAR MQTT dispositivo_001

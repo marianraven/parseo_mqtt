@@ -114,7 +114,7 @@ Programa es un conjunto de declaraciones y comandos.
 
 <desconectar> ::= DESCONECTAR MQTT <dispositivo> 
 
-<publicar> ::= PUBLICAR <mensaje> A <topic> CON KEY <valor_string> VALOR <valor>  
+<publicar> ::= PUBLICAR <dispositivo> <mensaje> A <topic> CON KEY <valor>   
 
 <suscribirse> ::= SUSCRIBIRSE A <topic> 
 
@@ -124,8 +124,6 @@ Programa es un conjunto de declaraciones y comandos.
 
 <auth> ::= AUTH <dispositivo> VALOR <valor> 
 
-<qos> ::= QOS <numero>
-
 ```
 
 Estas producciones permiten manejar operaciones básicas como conectarse, desconectarse y publicar mensajes, así como realizar operaciones de cifrado y autenticación.
@@ -133,13 +131,13 @@ Estas producciones permiten manejar operaciones básicas como conectarse, descon
 ## Operaciones Permitidas con el Lenguaje
 - **Conectar a un Broker MQTT**: Establece una conexión con un servidor MQTT.
 - **Desconectar del Broker MQTT**: Finaliza la conexión activa.
-- **Publicar Mensajes**: Envía mensajes a un tópico específico.
+- **Publicar Mensajes**: Envía mensajes desde un dispositivo a un tópico específico.
 - **Suscribirse y Desuscribirse a Tópicos**: Permite recibir o dejar de recibir mensajes de tópicos.
 - **Encriptar Valores**: Cifra información antes de ser enviada.
 - **Autenticación**: Verifica la identidad del dispositivo que se conecta.
 
 ## Palabras válidas de entrada
-CONECTAR, DESCONECTAR, PUBLICAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOSITIVO, MENSAJE, TOPIC, ENCRIPTADO, AUTH, QOS
+CONECTAR, DESCONECTAR, PUBLICAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOSITIVO, MENSAJE, TOPIC, ENCRIPTADO, AUTH
 
 ## Ejemplos de Programas
 Conectar a un dispositivo MQTT**
@@ -152,7 +150,7 @@ Publicar un mensaje a un tópico
 
 
 ```
-PUBLICAR mensaje_hola A topic_casa CON KEY "valor_secreto"
+PUBLICAR dispositivo mensaje_hola A topic_casa CON KEY "valor_secreto"
 ```
 Suscribirse a un tópico(del dispositivo ya conectado anteriormente)
 
@@ -164,7 +162,7 @@ Desconectar después de publicar un mensaje
 
 ```
 CONECTAR MQTT dispositivo_1
-PUBLICAR mensaje_update A topic_casa CON KEY "valor_actualizado"
+PUBLICAR dispositivo mensaje_update A topic_casa CON KEY "valor_actualizado"
 DESCONECTAR MQTT dispositivo_1
 ```
 Encriptar un valor
