@@ -1,0 +1,13 @@
+CONECTAR MQTT dispositivo_SensorTemperatura
+ENCRIPTADO  A TRUE
+AUTH "admin1" "admin123"
+SUSCRIBIRSE dispositivo_SensorTemperatura A topic_temperatura
+PUBLICAR dispositivo_SensorTemperatura mensaje_humedad55 A topic_temperatura CON KEY "claveprivada"
+CONECTAR MQTT dispositivo_2
+ENCRIPTADO  A TRUE
+AUTH "admin2" "admin123"
+SUSCRIBIRSE dispositivo_SensorTemperatura A topic_temperatura
+CONECTAR MQTT dispositivo_SensorTemperatura
+ENCRIPTADO  A FALSE
+PUBLICAR dispositivo_SensorTemperatura mensaje_humedad55 A topic_temperatura CON KEY "claveprivada"
+DESCONECTAR MQTT dispositivo_SensorTemperatura

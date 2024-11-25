@@ -57,8 +57,6 @@ Para comenzar a utilizar MQTT-Lenguaje, sigue estos pasos:
 
     ```bash
     python3 main.py 
-    python3 test1.py
-    python3 test2_complejos
     ```
 # Especificaciones
 
@@ -143,35 +141,33 @@ CONECTAR, DESCONECTAR, PUBLICAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOS
 Conectar a un dispositivo MQTT**
 
  ```
-CONECTAR MQTT dispositivo_1
+CONECTAR MQTT dispositivo_SensorTemperatura
  ```
 
 Publicar un mensaje a un tópico
 
 
 ```
-PUBLICAR dispositivo mensaje_hola A topic_casa CON KEY "valor_secreto"
+PUBLICAR dispositivo_SensorTemperatura mensaje_humedad55 A topic_temperatura CON KEY "claveprivada"
 ```
 Suscribirse a un tópico(del dispositivo ya conectado anteriormente)
 
 ```
-CONECTAR MQTT dispositivo_1
-SUSCRIBIRSE A topic_casa
+CONECTAR MQTT dispositivo_SensorTemperatura
+SUSCRIBIRSE dispositivo_SensorTemperatura A topic_temperatura
 ```
 Desconectar después de publicar un mensaje
 
 ```
-CONECTAR MQTT dispositivo_1
-PUBLICAR dispositivo mensaje_update A topic_casa CON KEY "valor_actualizado"
-DESCONECTAR MQTT dispositivo_1
+DESCONECTAR MQTT dispositivo_SensorTemperatura
 ```
 Encriptar un valor
 
 ```
-ENCRIPTADO KEY "clave_secreta" VALOR "dato_confidencial"
+ENCRIPTADO TRUE
 ```
 Autenticarse en un dispositivo
 
 ```
-AUTH dispositivo_1
+AUTH "admin" "admin123"
 ```
