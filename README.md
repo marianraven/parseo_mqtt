@@ -25,9 +25,46 @@ Contiene el analizador léxico (lexer), responsable de definir y reconocer los t
 ## mqtt_parser.py
 Define el analizador sintáctico (parser), que especifica la gramática del lenguaje y construye el árbol de sintaxis a partir de los tokens identificados por el lexer.
 ## main.py
-Es el archivo principal del proyecto, utilizado para probar el funcionamiento del lexer y el parser(tiene asociado el archivo entrada.txt, aunque finalmente decidi poner archivos de test más exaustivos).
-## test1 y test2_complejos
-Archivos destinados a pruebas automatizadas para validar el funcionamiento del lexer, parser y nuevas funcionalidades
+Es el archivo principal del proyecto, utilizado para probar el funcionamiento del lexer y el parser(tiene asociado el archivo entrada.txt, se podría cambiar a entrada1.txt).
+## entrada.txt y entrada1.txt
+Archivos de programas destinados a pruebas automatizadas para validar el funcionamiento del lexer, parser y nuevas funcionalidades.
+## Archivos generados automáticamente por PLY: `parser.out` y `parsertab.py`
+
+Cuando utilizamos la librería **PLY** (Python Lex-Yacc) para crear el analizador léxico y sintáctico, se generan automáticamente dos archivos: `parser.out` y `parsertab.py`. Estos archivos son necesarios para el funcionamiento del analizador pero no deben ser editados manualmente.
+
+---
+
+### Método de análisis: LALR
+El método **LALR** (*Look-Ahead LR*) es un tipo de análisis sintáctico utilizado por el analizador generado. Este método:
+- Combina las ventajas de los métodos **SLR** y **LR**.
+- Es eficiente tanto en memoria como en tiempo de procesamiento.
+- Es ideal para lenguajes de programación y lenguajes específicos como MQTT.
+
+---
+
+### `parser.out`
+Este archivo:
+- Es un registro detallado del análisis sintáctico generado a partir de la gramática definida en el código fuente.
+- Contiene:
+  - **Reglas de gramática** con sus correspondientes acciones o funciones en Python.
+  - **Estados del parser** y cómo cada uno responde a los diferentes tokens.
+  - **Conflictos** o ambigüedades en la gramática (si las hubiese).
+- Es útil para depurar el diseño de la gramática del lenguaje.
+
+---
+
+### `parsertab.py`
+Este archivo:
+- Contiene las **estructuras internas** necesarias para que el analizador funcione:
+  - Tablas de **acciones** para decidir cómo manejar cada token.
+  - Tablas de **transiciones** entre estados (usadas al reconocer no terminales).
+  - Definiciones de las **producciones de la gramática** y sus componentes.
+- Es generado automáticamente y no se modifica directamente.
+- Actúa como una base técnica para que el analizador interprete correctamente las reglas del lenguaje.
+
+---
+
+
 
 ## Instalación y Uso
 
@@ -65,38 +102,41 @@ A continuación se proporciona una explicación detallada de cada token definido
 
 ### Definición de Tokens
 
-| **Token**           | **Expresión Regular**          | **Descripción**                                           | **Ejemplo**          |
-|---------------------|--------------------------------|-----------------------------------------------------------|-----------------------|
-| **DISPOSITIVO**     | `r'dispositivo_[0-9]+'`       | Coincide con identificadores en el formato `dispositivo_<número>`. | `dispositivo_01`     |
-| **MENSAJE**         | `r'mensaje_[a-zA-Z_]+'`       | Coincide con identificadores en el formato `mensaje_<cadena>`. | `mensaje_alerta`     |
-| **PUBLICAR**        | `r'publicar'`                 | Indica una operación de envío de datos.                   | `publicar`           |
-| **A**               | `r'a'`                        | Especifica el destino en las operaciones.                 | `a`                  |
-| **CON**             | `r'con'`                      | Indica el uso de una clave o valor asociado.              | `con`                |
-| **KEY**             | `r'key'`                      | Especifica que el siguiente valor es una clave.           | `key`                |
-| **VALOR**           | `r'\"[^\"]*\"'`               | Captura cualquier texto dentro de comillas.               | `"mysecretkey"`      |
-| **ENCRIPTADO**      | `r'encriptado'`               | Indica una operación de cifrado.                          | `encriptado`         |
-| **AUTH**            | `r'auth'`                     | Indica una operación de autenticación.                    | `auth`               |
-| **MQTT**            | `r'mqtt'`                     | Se refiere al protocolo MQTT.                             | `mqtt`               |
-| **TOPIC**           | `r'topic'`                    | Especifica el tópico en las operaciones.                  | `topic`              |
-| **CONECTAR**        | `r'(?i)conectar'`             | Indica una operación de conexión.                         | `conectar`           |
-| **DESCONECTAR**     | `r'(?i)desconectar'`          | Indica una operación de desconexión.                      | `desconectar`        |
-| **SUSCRIBIRSE**     | `r'suscribirse'`              | Indica una operación de suscripción.                      | `suscribirse`        |
-| **DESUSCRIBIRSE**   | `r'desuscribirse'`            | Indica una operación de desuscripción.                    | `desuscribirse`      |
-|
-
+| **Token**           | **Expresión Regular**                | **Descripción**                                           | **Ejemplo**          |
+|---------------------|--------------------------------------|-----------------------------------------------------------|-----------------------|
+| **DISPOSITIVO**     | `r'[dD][iI][sS][pP][oO][sS][iI][tT][iI][vV][oO]_[a-zA-Z0-9]+'` | Coincide con identificadores en el formato `dispositivo_<valor>`. | `dispositivo_01`     |
+| **MENSAJE**         | `r'[mM][eE][nN][sS][aA][jJ][eE]_[a-zA-Z0-9_]+'` | Coincide con identificadores en el formato `mensaje_<valor>`. | `mensaje_alerta1`    |
+| **PUBLICAR**        | `r'(?i)publicar'`                   | Indica una operación de envío de datos (insensible al caso). | `Publicar`           |
+| **A**               | `r'a'`                              | Especifica el destino en las operaciones.                 | `a`                  |
+| **CON**             | `r'con'`                            | Indica el uso de una clave o valor asociado.              | `con`                |
+| **KEY**             | `r'key'`                            | Especifica que el siguiente valor es una clave.           | `key`                |
+| **VALOR**           | `r'\"[^\"]*\"'`                     | Captura cualquier texto dentro de comillas.               | `"textovalor"`      |
+| **ENCRIPTADO**      | `r'encriptado'`                     | Indica una operación de cifrado.                          | `encriptado`         |
+| **AUTH**            | `r'auth'`                           | Indica una operación de autenticación.                    | `auth`               |
+| **MQTT**            | `r'mqtt'`                           | Se refiere al protocolo MQTT.                             | `mqtt`               |
+| **TOPIC**           | `r'[tT][oO][pP][iI][cC]_[a-zA-Z0-9_]+'` | Especifica el tópico en las operaciones.                  | `Topic_sensores`     |
+| **CONECTAR**        | `r'(?i)conectar'`                   | Indica una operación de conexión al broker.    | `Conectar`           |
+| **DESCONECTAR**     | `r'(?i)desconectar'`                | Indica una operación de desconexión al broker. | `Desconectar`        |
+| **SUSCRIBIRSE**     | `r'suscribirse'`                    | Indica una operación de suscripción a un topic.                      | `suscribirse`        |
+| **DESUSCRIBIRSE**   | `r'desuscribirse'`                  | Indica una operación de desuscripción a un topic.                    | `desuscribirse`      |
+| **TRUE**            | `r'(?i)true'`                       | Representa un valor booleano verdadero.                   | `True`               |
+| **FALSE**           | `r'(?i)false'`                      | Representa un valor booleano falso.                       | `False`              |
 
 ## Funciones del Lexer
 - `t_ignore`: Especifica caracteres que se ignoran durante el análisis.
 - `t_error`: Maneja errores léxicos y omite caracteres no permitidos.
 - `t_DISPOSITIVO` y `t_MENSAJE`: Definen cómo se reconocen los tokens DISPOSITIVO y MENSAJE.
 
+
 ## Construcción del Lexer
 - `lex.lex()`: Construye el analizador léxico utilizando las definiciones de tokens y reglas.
 
-## Gramáticas
-Las gramáticas determinan cómo se deben estructurar las sentencias del lenguaje. 
+## Gramática
+En términos generales, las gramáticas determinan cómo se deben estructurar las sentencias del lenguaje. De este modo, se realiza el manejo estructurado de lo que está permitido.
 
-Algunas producciones básicas:
+### Gramática del lenguaje MQTT
+
+En esta gramatica se pueden apreciar las sigueintes sentencias:
 
 Programa es un conjunto de declaraciones y comandos.
 
@@ -118,9 +158,9 @@ Programa es un conjunto de declaraciones y comandos.
 
 <desuscribirse> ::= DESUSCRIBIRSE A <topic> 
 
-<encriptar> ::= ENCRIPTADO KEY <key> VALOR <valor> 
+<encriptar> ::= ENCRIPTADO TRUE | ENCRIPTADO FALSE 
 
-<auth> ::= AUTH <dispositivo> VALOR <valor> 
+<auth> ::= AUTH <valor> <valor> 
 
 ```
 
@@ -135,7 +175,7 @@ Estas producciones permiten manejar operaciones básicas como conectarse, descon
 - **Autenticación**: Verifica la identidad del dispositivo que se conecta.
 
 ## Palabras válidas de entrada
-CONECTAR, DESCONECTAR, PUBLICAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOSITIVO, MENSAJE, TOPIC, ENCRIPTADO, AUTH
+CONECTAR, DESCONECTAR, PUBLICAR, A, CON, KEY, VALOR, DESUSCRIBIRSE, MQTT, DISPOSITIVO, MENSAJE, TOPIC, ENCRIPTADO, AUTH, TRUE, FALSE.
 
 ## Ejemplos de Programas
 Conectar a un dispositivo MQTT**
